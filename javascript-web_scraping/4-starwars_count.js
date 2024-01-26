@@ -4,23 +4,21 @@
 const request = require('request');
 
 const apiurl = process.argv[2];
-const wedgeAntillesId = 18;;
 
 request(apiurl, (error, response, body) => {
   if (error) {
     console.error(error);
-  } 
-  else {
+  } else {
     const filmData = JSON.parse(body).results;
-    let numberApparition = 0;
+    let numberoffilm = 0;
 
-  for (const film of filmData) {
-    for (const character of film.characters) {
-      if (character.includes('/18/')) {
-        numberApparition += 1;
+    for (const film of filmData) {
+      for (const character of film.characters) {
+        if (character.includes('/18/')) {
+          numberoffilm += 1;
+        }
       }
     }
-  }
-    console.log(numberApparition);
+    console.log(numberoffilm);
   }
 });
