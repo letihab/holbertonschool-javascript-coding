@@ -1,5 +1,5 @@
 #!/usr/bin/node
-//  Write a script that prints the title of a Star Wars movie where the episode number matches a given integer.
+//  Write a script that prints the title of a Star Wars movie.
 
 const request = require('request');
 
@@ -11,7 +11,7 @@ request.get(apiUrl, (error, response, body) => {
   if (error) {
     console.error(error);
   } else if (response.statusCode !== 200) {
-    console.error('Error:', error)
+    console.error('Error:', error);
   } else {
     const movieData = JSON.parse(body);
     console.log(movieData.title);
