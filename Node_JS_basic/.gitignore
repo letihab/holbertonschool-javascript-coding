@@ -1,0 +1,12 @@
+# Ignore compiled files
+*.class
+*.o
+*.pyc
+
+# Ignore build output
+/build/
+/dist/
+
+# Ignore configuration files
+*.config
+*.env
