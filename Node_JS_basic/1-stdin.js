@@ -1,18 +1,16 @@
-// 1-stdin.js
-const readline = require('readline');
+function question() {
+  process.stdout.write('Welcome to Holberton School, what is your name?\n');
+  process.stdin.setEncoding('utf-8');
+  process.stdin.on('data', (input) => {
+    const name = input.trim(); // Trim to remove leading/trailing whitespace
+    process.stdout.write(`Your name is: ${name}\n`);
+    process.stdout.write('This important software is now closing\n');
+    process.exit(); // Move exit after printing closing message
+  });
+}
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+module.exports = question;
 
-console.log('Welcome to Holberton School, what is your name?');
-
-rl.on('line', (input) => {
-  console.log(`Your name is: ${input}`);
-  rl.close();
-});
-
-rl.on('close', () => {
-  console.log('This important software is now closing');
-});
+if (require.main === module) {
+  question();
+}
