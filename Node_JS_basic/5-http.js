@@ -12,10 +12,11 @@ const app = http.createServer((req, res) => {
         res.end('This is the list of our students\n');
       })
       .catch((error) => {
-        res.end(`This is the list of our students\n${error.message}\n`);
+        res.statusCode = 500; // Internal Server Error
+        res.end(`Error: ${error.message}\n`);
       });
   } else {
-    res.statusCode = 404;
+    res.statusCode = 404; // Not Found
     res.end('Not Found\n');
   }
 }).listen(1245);
