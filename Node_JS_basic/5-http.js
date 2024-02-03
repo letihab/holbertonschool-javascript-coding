@@ -1,7 +1,7 @@
 const http = require('http');
 const countStudents = require('./3-read_file_async');
 
-const db = process.argv[2];
+const path = process.argv[2];
 
 const app = http.createServer((req, res) => {
   const { url } = req;
@@ -13,7 +13,7 @@ const app = http.createServer((req, res) => {
   }
 
   if (url === '/students') {
-    countStudents(db)
+    countStudents(path)
       .then((result) => {
         res.write('This is the list of our students\n');
         res.write(`${result.sentence1}\n`);
@@ -27,4 +27,5 @@ const app = http.createServer((req, res) => {
       });
   }
 }).listen(1245);
+
 module.exports = app;
