@@ -8,7 +8,6 @@ app.get('/', (req, res) => {
   const message = 'Hello Holberton School!';
   res.type('text/plain').send(message);
 });
-
 app.get('/students', (req, res) => {
   const messageIntro = 'This is the list of our students';
   countStudents(db)
@@ -24,7 +23,5 @@ app.get('/students', (req, res) => {
       res.type('text/plain').send(errorMessage);
     });
 });
-
 app.listen(1245);
-
 module.exports = app;
