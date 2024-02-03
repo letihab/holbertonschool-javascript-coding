@@ -2,23 +2,29 @@ const express = require('express');
 const countStudents = require('./3-read_file_async');
 
 const app = express();
-const port = 1245;
+const db = process.argv[2];
 
 app.get('/', (req, res) => {
-  res.send('Hello Holberton School!\n');
+  const message = 'Hello Holberton School!';
+  res.type('text/plain').send(message);
 });
 
 app.get('/students', (req, res) => {
-  countStudents(process.argv[2])
+  const messageIntro = 'This is the list of our students';
+  countStudents(db)
     .then((result) => {
-      res.send(`This is the list of our students\n${result.sentence1}\n${result.sentence2}\n${result.sentence3}`);
+      const message1 = result.sentence1;
+      const message2 = result.sentence2;
+      const message3 = result.sentence3;
+      const fullMessage = `${messageIntro}\n${message1}\n${message2}\n${message3}`;
+      res.type('text/plain').send(fullMessage);
     })
     .catch((error) => {
-      res.status(500).send(`This is the list of our students\n${error.message}`);
+      const errorMessage = `${messageIntro}\n${error.message}`;
+      res.type('text/plain').send(errorMessage);
     });
 });
 
-app.listen(port, () => {
-  console.log(`Server is listening on port ${port}`);
-});
+app.listen(1245);
+
 module.exports = app;
