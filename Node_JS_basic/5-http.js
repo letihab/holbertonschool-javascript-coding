@@ -4,27 +4,20 @@ const countStudents = require('./3-read_file_async');
 const path = process.argv[2];
 
 const app = http.createServer((req, res) => {
-  const { url } = req;
   res.writeHead(200, { 'Content-type': 'text/plain' });
-
-  if (url === '/') {
-    res.write('Hello Holberton School!');
-    res.end();
-  }
-
-  if (url === '/students') {
-    countStudents(path)
-      .then((result) => {
-        res.write('This is the list of our students\n');
-        res.write(`${result.sentence1}\n`);
-        res.write(`${result.sentence2}\n`);
-        res.write(`${result.sentence3}`);
-        res.end();
-      })
-      .catch((error) => {
-        res.write(`This is the list of our students\n${error.message}`);
-        res.end();
-      });
+  if (req.method === 'GET') {
+    if (req.url === '/') {
+      res.end('Hello Holberton School!');
+    } else if (req.url === '/students') {
+      res.write('This is the list of our students\n');
+      countStudents(path)
+        .then((result) => {
+          res.end(`${result}`);
+        })
+        .catch((error) => {
+          res.end(error.message);
+        });
+    }
   }
 }).listen(1245);
 
